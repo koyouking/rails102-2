@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_action :authenticate_user! , only: [:new]
   def index
     @groups = Group.all
   end
@@ -31,7 +32,6 @@ class GroupsController < ApplicationController
     end
   end
 
-
   def destroy
     @group = Group.find(params[:id])
     @group.destroy
@@ -44,6 +44,4 @@ class GroupsController < ApplicationController
   def group_params
     params.require(:group).permit(:title, :description)
   end
-
-
 end
